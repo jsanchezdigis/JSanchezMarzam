@@ -1,0 +1,303 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://bootboxjs.com/bootbox.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<div class="modal" tabindex="-1" role="dialog" id="Modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <style>
+                    :root {
+                        --small-mobile-font-size: 20px;
+                        --large-mobile-font-size: 22px;
+                        --desktop-font-size: 18px;
+                    }
+
+                    body {
+                        font-family: sans-serif;
+                        font-weight: 500;
+                        margin: 20px 10px 0 20px;
+                    }
+
+                    button {
+                        background-color: black;
+                        border: 1px solid #ccc;
+                        border-radius: 2px;
+                        color: #eee;
+                        cursor: pointer;
+                        display: block;
+                        font-size: 20px; /* fallback */
+                        font-size: var(--large-mobile-font-size);
+                        font-weight: 400;
+                        margin: 3px 0 0 0;
+                        padding: 14px;
+                    }
+
+                        button:disabled {
+                            color: #888;
+                            cursor: default;
+                        }
+
+                        button:not(:disabled):hover {
+                            background-color: #333;
+                            color: white;
+                        }
+
+                    div.explanation {
+                        font-size: 14px;
+                        margin: 10px 0 0 0;
+                    }
+
+                    section#cc-exp-csc div:not(:last-child) {
+                        margin: 0 10px 0 0;
+                    }
+
+                    div#exp-month-year {
+                        width: 50%;
+                    }
+
+                    form {
+                        border-bottom: 1px solid #ccc;
+                        margin: 0 0 20px 0;
+                        padding: 0 0 20px 0;
+                    }
+
+                    h1 {
+                        border-bottom: 1px solid #ccc;
+                        font-size: 28px;
+                        font-weight: 300;
+                        margin: 0 0 30px 0;
+                        padding: 0 0 10px 0;
+                    }
+
+                    input {
+                        border: 1px solid #ccc;
+                        font-size: 22px; /* fallback */
+                        font-size: var(--large-mobile-font-size);
+                        padding: 15px;
+                        width: 90%; /* fallback */
+                        width: calc(100% - 30px); /* full width minus padding */
+                    }
+
+                        input:not(:focus):invalid {
+                            color: red;
+                            outline-color: red;
+                        }
+
+                    label {
+                        display: block;
+                        font-size: 20px;
+                        font-size: var(--large-mobile-font-size);
+                        font-weight: 400;
+                        margin: 0 0 8px 0;
+                    }
+
+                    main {
+                        margin: 0 auto;
+                        max-width: 500px;
+                    }
+
+                    p {
+                        font-size: 19px;
+                        font-weight: 400;
+                    }
+
+                    form section {
+                        margin: 0 0 15px 0;
+                        position: relative;
+                    }
+
+                        form section:last-of-type {
+                            margin: 0 0 25px 0;
+                        }
+
+                    section#cc-exp-csc {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+
+                    select {
+                        background-color: white;
+                        border: 1px solid #ccc;
+                        display: inline-block;
+                        font-size: var(--mobile-font-size);
+                        padding: 15px 15px 15px 11px;
+                        width: 45%;
+                    }
+
+                    body {
+                        margin: 40px 20px 0 40px;
+                    }
+
+                    button {
+                        font-size: 20px; /* fallback */
+                        font-size: var(--large-mobile-font-size);
+                    }
+
+                    div.explanation {
+                        font-size: 16px;
+                    }
+
+                    h1 {
+                        font-size: 36px;
+                        font-weight: 500;
+                        margin: 0 0 40px 0;
+                    }
+
+                    input {
+                        font-size: 22px; /* fallback */
+                        font-size: var(--large-mobile-font-size);
+                    }
+
+                    label {
+                        font-size: 22px; /* fallback */
+                        font-size: var(--large-mobile-font-size);
+                        margin: 0 0 10px 0;
+                    }
+
+                    p {
+                        font-weight: 100;
+                        line-height: 1.5em;
+                    }
+
+                    form section {
+                        margin: 0 0 40px 0;
+                    }
+
+                        form section:last-of-type {
+                            margin: 0 0 20px 0;
+                        }
+
+                    body {
+                        margin: 20px 70px 0 70px;
+                    }
+
+                    button {
+                        font-size: 18px; /* fallback */
+                        font-size: var(--desktop-font-size);
+                    }
+
+                    section#cc-exp-csc div:not(:last-child) {
+                        margin: 0 20px 0 0;
+                    }
+
+                    form {
+                        margin: 0 0 20px 0;
+                        padding: 0 0 20px 0;
+                    }
+
+                    h1 {
+                        font-size: 36px;
+                        font-weight: 100;
+                    }
+
+                    input {
+                        font-size: 18px; /* fallback */
+                        font-size: var(--desktop-font-size);
+                    }
+
+                    label {
+                        font-size: 18px; /* fallback */
+                        font-size: var(--desktop-font-size);
+                        margin: 0 0 10px 0;
+                    }
+
+                    form section {
+                        margin: 0 0 35px 0;
+                    }
+
+                </style>
+
+                <head>
+                    <title>Payment form</title>
+                    <meta charset="utf-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <link rel="stylesheet" href="css/main.css">
+                    <script src="js/main.js" defer></script>
+                </head>
+
+                <body>
+
+                    <main>
+
+                        <form action="#" method="post">
+
+                            <h1>Formulario de pago</h1>
+
+                            <section>
+                                <label for="cc-number">Numero de Tarjeta</label>
+                                <!-- Allow for spaces and for shorter and longer payment card numbers -->
+                                <input id="cc-number" name="cc-number" autocomplete="cc-number" inputmode="numeric" maxlength="50" pattern="[\d ]{10,30}" required>
+                            </section>
+
+                            <section>
+                                <label for="cc-name">Nombre de la Tarjeta</label>
+                                <input id="cc-name" name="cc-name" autocomplete="cc-name" maxlength="50" pattern="[\p{L} \-\.]+" required>
+                            </section>
+
+                            <section id="cc-exp-csc">
+                                <div>
+                                    <label for="cc-exp">Fecha de Expiracion</label>
+                                    <input id="cc-exp" name="cc-exp" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5" required>
+                                </div>
+                                <div>
+                                    <label for="cc-csc">Codigo de Seguridad</label>
+                                    <input id="cc-csc" name="cc-csc" inputmode="numeric" maxlength="3" required>
+                                    <div class="explanation">Al reverso de la Tarjeta, ultimos 3 digitos</div>
+                                </div>
+                            </section>
+
+                            @*<button id="complete-payment">Complete payment</button>*@
+                            <button class="btn btn-success" id='complete-payment' onclick="location.href='@Url.Action("Pagar","MediCompra")'">Completar Pago</button>
+
+                        </form>
+
+                    </main>
+
+                </body>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#Modal').modal();
+</script>
+
+@section scripts{
+    <script type="text/javascript">
+
+        const form = document.querySelector('form');
+        const completePaymentButton = document.querySelector('button#complete-payment');
+
+        form.addEventListener('submit', handleFormSubmission);
+
+        function handleFormSubmission(event) {
+            event.preventDefault();
+            validate();
+            form.reportValidity();
+            if (form.checkValidity() === false) {
+                // Handle invalid form data.
+            } else {
+                // On a production site do form submission.
+                completePaymentButton.textContent = 'Making payment...';
+                completePaymentButton.disabled = 'true';
+                alert('Made payment!');
+                completePaymentButton.textContent = 'Payment complete!';
+            }
+        }
+
+    </script>
+}

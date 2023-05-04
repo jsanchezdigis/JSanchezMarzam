@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/Login.css" />
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <h2 class="active"> Sign In </h2>
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="~/Img/User1.png" id="icon" alt="User Icon" />
+        </div>
+        @using (Html.BeginForm("Login", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+        <!-- Login Form -->
+        <form>
+            <input type="text" id="login" class="fadeIn second" name="UserName" placeholder="UserName">
+            <input type="text" id="password" class="fadeIn third" name="Password" placeholder="Password">
+            <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+        }
+    </div>
+</div>
+

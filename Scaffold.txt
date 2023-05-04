@@ -1,0 +1,3 @@
+Scaffold-DbContext "Server=.; Database= JSanchezMarzam; User ID=sa; TrustServerCertificate=True; Password=pass@word1; Integrated Security=True;" Microsoft.EntityFrameworkCore.SqlServer
+
+Scaffold-DbContext "Server=.; Database= JSanchezMarzam; User ID=sa; TrustServerCertificate=True; Password=pass@word1;" Microsoft.EntityFrameworkCore.SqlServer

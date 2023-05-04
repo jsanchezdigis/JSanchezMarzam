@@ -1,0 +1,65 @@
+﻿@model ML.Medicamento
+@{
+    ViewData["Title"] = "GetCards";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/Cards.css" />
+<h1>Medicamentos</h1>
+
+<div class="row">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="float:right">
+                @Html.ActionLink("Carrito", "Resumen", "MediCompra", htmlAttributes: new { @class = "btn btn-success" })
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-2 row-cols-md-3 ">
+@foreach (ML.Medicamento medicamento in Model.Medicamentos)
+{
+    <div class="card">
+        <div class="container-image">
+            @if (medicamento.Imagen != null)
+            {
+                <img id="Img" src="data:image/*;base64,@medicamento.Imagen" class="image-circle" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd">
+                <path class="fil-shoes1" />
+            }
+            else
+            {
+                <img id="Img" src="~/Img/Default.jpg" class="image-circle" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd">
+                <path class="fil-shoes1" />
+            }
+        </div>
+        <div class="content">
+            <div class="detail">
+                <span>@medicamento.Nombre</span>
+                <p>Precio: $@medicamento.Precio</p>
+                    @*<button onclick="location.href='@Url.Action("Compra", "MediCompra", new { IdMedicamento = medicamento.IdMedicamento, Nombre = medicamento.Nombre, Precio = medicamento.Precio })'">Compra</button>*@
+                    <a href="@Url.Action("Compra", "MediCompra", new { IdMedicamento = medicamento.IdMedicamento, Nombre = medicamento.Nombre, Precio = medicamento.Precio })" class="btn btn-success">Añadir <i class="bi bi-cart3" style="color: khaki"></i> </a>
+            </div>
+            <div class="product-image">
+                <div class="box-image">
+                    @if (medicamento.Imagen != null)
+                    {
+                        <img id="Img" src="data:image/*;base64,@medicamento.Imagen" class="img-product" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd">
+                        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+
+                        <path class="fil-shoes2" />
+                    }
+                    else
+                    {
+                        <img id="Img" src="~/Img/Default.jpg" class="img-product" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd">
+                        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+
+                        <path class="fil-shoes2" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+</div>
+

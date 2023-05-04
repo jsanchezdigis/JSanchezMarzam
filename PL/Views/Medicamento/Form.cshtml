@@ -1,0 +1,114 @@
+﻿@model ML.Medicamento
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Aseguradora</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Medicamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.IdMedicamento, new { @class = "visually-hidden" })
+
+                            @Html.TextBoxFor(model => model.IdMedicamento, new { @class = "visually-hidden form-control" })
+                            @Html.ValidationMessageFor(model => model.IdMedicamento)
+                            @*hidden*@
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.Nombre)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa-solid fa-building" style="color:darkcyan"></i></span>
+                                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                                    @Html.ValidationMessageFor(model => model.Nombre)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.Precio)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa-solid fa-building" style="color:darkcyan"></i></span>
+                                    @Html.TextBoxFor(model => model.Precio, new { @class = "form-control", @id = "txtPrecio" })
+                                    @Html.ValidationMessageFor(model => model.Precio)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group-addon col-md-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user-plus"></i></span>
+                            <input id="fuImage" type='file' class="form-control" name="fuImage" onchange="validateFile(this), readURL(this);  " />
+                        </div>
+                        @if (Model.Imagen != null)
+                        {
+                            <img id="Img" src="data:image/*;base64,@Model.Imagen" style="width:250px ; height:250px" />
+                        }
+                        else
+                        {
+                            <img id="Img" src="~/Img/User1.png" style="width:250px ; height:250px" />
+                        }
+                        @Html.HiddenFor(model => model.Imagen)
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><i class="fa-solid fa-bookmark" style="color:green"></i></span>
+                                <input type="submit" value="Guardar" class="btn btn-success" />
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><i class="fa-solid fa-rotate-left" style="color:red"></i></span>
+                                @Html.ActionLink("Regresar", "GetAll", "Aseguradora", htmlAttributes: new { @class = "btn btn-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        function validateFile() {
+            var allowedExtension = ['jpeg', 'jpg', 'png'];
+            var fileExtension = document.getElementById('fuImage').value.split('.').pop().toLowerCase();
+            var isValidFile = false;
+            for (var index in allowedExtension) {
+                if (fileExtension === allowedExtension[index]) {
+                    isValidFile = true;
+                    break;
+                }
+            }
+            if (!isValidFile) {
+                alert('Las extensiones permitidas son : *.' + allowedExtension.join(', *.'));
+                document.getElementById('fuImage').value = ""
+            }
+            return isValidFile;
+        }
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#Img').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}

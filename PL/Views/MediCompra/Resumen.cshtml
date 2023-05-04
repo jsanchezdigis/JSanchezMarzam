@@ -1,0 +1,138 @@
+﻿@model ML.CompraMedicamento
+@{
+    ViewData["Title"] = "Resumen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/css/Table.css" />
+@if (Context.Session.GetString("Medicamento") == null)
+{
+    <h2>Tu Carrito esta vacio</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Vuelve al catalogo para agregar medicamentos a tu carrito</h5>
+            <hr />
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div style="float:right">
+                    @Html.ActionLink("Volver al catálogo", "GetCards", "MediCompra", htmlAttributes: new { @class = "btn btn-success" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+
+    <div class="container">
+        <div class="row">
+            <h2>Carrito</h2>
+        </div>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-12">
+                <div style="float:right">
+                    @Html.ActionLink("Volver al catálogo", "GetCards", "MediCompra", htmlAttributes: new { @class = "btn btn-success" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @if (Model.Compras != null)
+            {
+                <table class="table table-bordered table-responsive table-hover" id="tblMedicamentoCompra">
+                    <thead>
+                        <tr>
+
+                            <td style="display:none;">IdMedicamento</td>
+                            <td class="text-center" style=" font-weight:bold;">Foto</td>
+                            <td class="text-center" style=" font-weight:bold;">Nombre</td>
+                            <td class="text-center" style=" font-weight:bold;">Precio</td>
+                            <td style="text-center" style=" font-weight:bold;">Añadir</td>
+                            <td class="text-center" style=" font-weight:bold;">Cantidad</td>
+                            <td style="text-center" style=" font-weight:bold;">Eliminar</td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (ML.Medicamento medicamento in Model.Compras)
+                        {
+                            <tr>
+
+                                <td style="display:none;">@medicamento.IdMedicamento</td>
+                                <td style="text-align: center; vertical-align: middle;">
+                                    @if (medicamento.Imagen != null)
+                                    {
+
+                                        <img id="Img" src="data:image/*;base64,@medicamento.Imagen" style="width:100px ; height:100px" />
+
+                                    }
+                                    else
+                                    {
+                                        <img id="Img" src="~/Img/Default.jpg" style="width:100px ; height:100px" />
+                                    }
+                                </td>
+                                <td style="text-align: center; vertical-align: middle;">@medicamento.Nombre</td>
+                                <td style="text-align: center; vertical-align: middle;">@medicamento.Precio</td>
+                                <td style="text-align: center; vertical-align: middle;"><button class="btn btn-success" id='aumentar' onclick="location.href='@Url.Action("Add","MediCompra",new {IdMedicamento = medicamento.IdMedicamento})'" value="aumentar">+</button></td>
+                                <td style="text-align: center; vertical-align: middle;"><input id="cantidad" type='text' value="@medicamento.Cantidad" /></td>
+                                <td style="text-align: center; vertical-align: middle;"><button class="btn btn-danger" id='disminuir' onclick="location.href='@Url.Action("Delete","MediCompra",new {IdMedicamento = medicamento.IdMedicamento})'" value="disminuir">-</button></td>
+                            </tr>
+                        }
+                    </tbody>
+                    @foreach (ML.Medicamento medicamento1 in Model.Compras)
+                    {
+                        <tfoot>
+                            <tr class="total">
+                                <th></th>
+                                <th style="display:none">Total:</th>
+                                <th style="display:none">@medicamento1.SubTotal</th>@*total*@
+                                <th></th>
+                                <th id="total">Total:</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    }
+
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-danger" role="alert">El alumno no tiene materias O ocurrio un error al realizar la consulta </div>
+            }
+        </div>
+        @Html.ActionLink("Comprar", "Formulario", "MediCompra", htmlAttributes: new { @class = "btn btn-success" })
+    </div>
+
+}
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        //for (i = 4; i <= 4; i++) {
+        //    var total = 0;
+        //    $('table#tblMedicamentoCompra tbody td:nth-child(' + i + ')').each(function (index) {
+        //        total += parseFloat($(this).text());
+        //    });
+        //    $('table#tblMedicamentoCompra tfoot th:nth-child(' + i + ')').text("Total: " + total)
+        //}
+        $(document).ready(function () {
+            var sum = 0;
+            $('#tblMedicamentoCompra tfoot tr').each(function () {
+                var precio = $(this).find('th:nth-child(3)').text();
+                sum += parseFloat(precio);
+            });
+            $('#total').text(sum.toFixed(2));
+        });
+
+        // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+        $(window).on("load resize ", function () {
+            var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+            $('.tbl-header').css({ 'padding-right': scrollWidth });
+        }).resize();
+
+    </script>
+}
+
